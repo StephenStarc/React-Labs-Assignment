@@ -25,7 +25,7 @@ export default function NavbarComponent() {
           className="sm:hidden"
         />
         <NavbarBrand>
-          <p className="font-bold text-inherit">ACME</p>
+          <p className="font-bold text-inherit">Stephen Starc</p>
         </NavbarBrand>
       </NavbarContent>
 
