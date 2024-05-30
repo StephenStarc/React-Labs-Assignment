@@ -44,17 +44,16 @@ export default function FormPage(){
         setIsFormChanged(true);
     }
     const submitHandler = (event) => {
-
-        console.log(Name,Address,Email,Phone)
         event.preventDefault()
         if(Name == '' || Address == '' || Email == '' || Phone == ''){
             toast.error(`Please fill all the fields `)
         }else{
-            localStorage.setItem('assignment-form',JSON.stringify({Name,Address,Email,Phone}))
-            toast(`🦄 Added Item Successfully 🚀 `)
+            const id = Math.random().toString(36).substring(2, 20);
+            localStorage.setItem('assignment-form',JSON.stringify({id,Name,Address,Email,Phone}))
+            toast(`🦄 Form Saved Successfully 🚀 `)
         }
        
-       
+       setIsFormChanged(false)
     }
 
     return (

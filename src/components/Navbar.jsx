@@ -1,22 +1,39 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenuToggle, NavbarMenu, NavbarMenuItem, Link, Button} from "@nextui-org/react";
 import { Link as RouterLink} from "react-router-dom";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { auth } from "../../firebase/firebaseConfig";
+import {Avatar, AvatarGroup, AvatarIcon} from "@nextui-org/avatar";
+import { toast } from "react-toastify";
+import { LuLogOut } from "react-icons/lu";
 export default function NavbarComponent() {
+
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  
+  const user = JSON.parse(localStorage.getItem('user-info'))
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const menuItems = [
-    "Profile",
-    "Dashboard",
-    "Activity",
-    "Analytics",
-    "System",
-    "Deployments",
-    "My Settings",
-    "Team Settings",
-    "Help & Feedback",
-    "Log Out",
-  ];
+useEffect(()=>{
+  if(user){
+    setIsLoggedIn(true)
+  }
+},[])
+  const handleGoogleLogin = async () => {
+    const provider =  new GoogleAuthProvider();
+    return signInWithPopup(auth, provider).then((result) => {
+      const credential = GoogleAuthProvider.credentialFromResult(result);
+      const token = credential.accessToken;
+      const userData = result.user;
+      localStorage.setItem('user-info', JSON.stringify(userData))
+      setIsLoggedIn(true)
+    })
+    
+  }
 
+  const handleLogout = () => {
+    localStorage.removeItem('user-info')
+    setIsLoggedIn(false)
+  }
   return (
     <Navbar onMenuOpenChange={setIsMenuOpen}>
       <NavbarContent>
@@ -25,7 +42,7 @@ export default function NavbarComponent() {
           className="sm:hidden"
         />
         <NavbarBrand>
-          <p className="font-bold text-inherit">Stephen Starc</p>
+          <p className="font-bold text-inherit">Stephen</p>
         </NavbarBrand>
       </NavbarContent>
 
@@ -41,30 +58,27 @@ export default function NavbarComponent() {
         </NavbarItem>
       </NavbarContent>
       <NavbarContent justify="end">
+        {user && isLoggedIn ? <><Avatar src={user.photoURL} size="md" isBordered  icon={<AvatarIcon />} /><NavbarItem className="hidden lg:flex"><p>{user.displayName}</p></NavbarItem> <Button color="danger" onClick={handleLogout} className="flex"><LuLogOut /></Button></>: 
+        (<><NavbarItem className="hidden lg:flex">
+          <Button color="primary" onClick={handleGoogleLogin}>Login</Button>
+        </NavbarItem>
         <NavbarItem className="hidden lg:flex">
-          <Link href="#">Login</Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Button as={Link} color="primary" href="#" variant="flat">
-            Sign Up
-          </Button>
-        </NavbarItem>
+        <Button color="primary" onClick={handleGoogleLogin} variant="flat">
+          Sign Up
+        </Button>
+      </NavbarItem></>)}
+        
       </NavbarContent>
       <NavbarMenu>
-        {menuItems.map((item, index) => (
-          <NavbarMenuItem key={`${item}-${index}`}>
-            <Link
-              color={
-                index === 2 ? "primary" : index === menuItems.length - 1 ? "danger" : "foreground"
-              }
-              className="w-full"
-              href="#"
-              size="lg"
-            >
-              {item}
-            </Link>
-          </NavbarMenuItem>
-        ))}
+      {user && isLoggedIn ? <><Avatar src={user.photoURL} size="md" isBordered  icon={<AvatarIcon />} /><p>{user.displayName}</p> <Button color="danger" onClick={handleLogout} className="flex"><LuLogOut /></Button></>: 
+        (<><NavbarItem className="lg:flex">
+          <Button color="primary" onClick={handleGoogleLogin}>Login</Button>
+        </NavbarItem>
+        <NavbarItem>
+        <Button color="primary" onClick={handleGoogleLogin} variant="flat">
+          Sign Up
+        </Button>
+      </NavbarItem></>)}
       </NavbarMenu>
     </Navbar>
   );
