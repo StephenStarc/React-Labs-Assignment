@@ -9,6 +9,7 @@ import FormPage from './pages/FormPage'
 import UserProfile from './components/UserProfile'
 import Layout from './components/Layout'
 import HomeHeader from './components/HomeHeader'
+import NotAuth from './Fun/NotAuth'
 function App() {
   const [count, setCount] = useState(0)
 
@@ -17,6 +18,7 @@ function App() {
     <Layout>
     <HomeHeader/>
     </Layout>
+
  
     </>
   )
