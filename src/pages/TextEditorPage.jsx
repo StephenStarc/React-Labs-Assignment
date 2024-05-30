@@ -28,7 +28,8 @@ export default function TextEditorPage(){
     
 return (
         <Layout>
-            <div className="text-editor container mx-auto" >
+            
+            <div className="text-editor container mx-auto mt-10" >
         <ReactQuill theme="snow" value={EditorData} onChange={handleEditorChange} />
         <Button onClick={handleClearContent} className="mt-4 flex " color="danger" auto >Clear Content</Button>
         </div>

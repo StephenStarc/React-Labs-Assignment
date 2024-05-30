@@ -3,8 +3,7 @@ import {Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenuToggle, Navbar
 import { Link as RouterLink} from "react-router-dom";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth } from "../../firebase/firebaseConfig";
-import {Avatar, AvatarGroup, AvatarIcon} from "@nextui-org/avatar";
-import { toast } from "react-toastify";
+import {Avatar, AvatarIcon} from "@nextui-org/avatar";
 import { LuLogOut } from "react-icons/lu";
 export default function NavbarComponent() {
 
@@ -21,8 +20,6 @@ useEffect(()=>{
   const handleGoogleLogin = async () => {
     const provider =  new GoogleAuthProvider();
     return signInWithPopup(auth, provider).then((result) => {
-      const credential = GoogleAuthProvider.credentialFromResult(result);
-      const token = credential.accessToken;
       const userData = result.user;
       localStorage.setItem('user-info', JSON.stringify(userData))
       setIsLoggedIn(true)
@@ -42,7 +39,11 @@ useEffect(()=>{
           className="sm:hidden"
         />
         <NavbarBrand>
-          <p className="font-bold text-inherit">Stephen</p>
+          <RouterLink to='/'>
+        <h1 className=' text-lg font-bold  text-black text-black-600 md:text-4xl'>
+          REACT<span className='bg-black text-white'>LABS</span>
+          </h1>
+          </RouterLink>
         </NavbarBrand>
       </NavbarContent>
 
@@ -50,7 +51,7 @@ useEffect(()=>{
         <NavbarItem>
           <RouterLink to={'/form'}>Form</RouterLink>
         </NavbarItem>
-        <NavbarItem isActive>
+        <NavbarItem>
         <RouterLink to={'/counter'}>Counter</RouterLink>
         </NavbarItem>
         <NavbarItem>
@@ -58,7 +59,7 @@ useEffect(()=>{
         </NavbarItem>
       </NavbarContent>
       <NavbarContent justify="end">
-        {user && isLoggedIn ? <><Avatar src={user.photoURL} size="md" isBordered  icon={<AvatarIcon />} /><NavbarItem className="hidden lg:flex"><p>{user.displayName}</p></NavbarItem> <Button color="danger" onClick={handleLogout} className="flex"><LuLogOut /></Button></>: 
+        {user && isLoggedIn ? <><RouterLink to={'/dashboard'}><Avatar src={user.photoURL} size="md" isBordered  icon={<AvatarIcon />} /></RouterLink><NavbarItem className="hidden lg:flex"><p>{user.displayName}</p></NavbarItem> <Button color="danger" onClick={handleLogout} className="flex"><LuLogOut /></Button></>: 
         (<><NavbarItem className="hidden lg:flex">
           <Button color="primary" onClick={handleGoogleLogin}>Login</Button>
         </NavbarItem>
