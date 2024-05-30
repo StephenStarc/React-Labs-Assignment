@@ -7,7 +7,8 @@ import "./index.css"
 import CounterPage from './pages/CounterPage.jsx'
 import FormPage from './pages/FormPage.jsx'
 import TextEditorPage from './pages/TextEditorPage.jsx'
-
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify'
 const router = createBrowserRouter([
   {path:'/',element:<App/>},
   {path:'/counter',element:<CounterPage/>},
@@ -18,7 +19,8 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
      <NextUIProvider>
-    <RouterProvider router={router}></RouterProvider>
+    <RouterProvider router={router}/>
+    <ToastContainer/>
     </NextUIProvider>
   </React.StrictMode>,
 )

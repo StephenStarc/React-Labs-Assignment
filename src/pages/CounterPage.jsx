@@ -1,6 +1,7 @@
 import { Button, Card, CardBody } from "@nextui-org/react"
 import { useState } from "react"
 import '../styles.css'
+import Layout from "../components/Layout"
 export default function CounterPage(){
 
     const [ counter, setCounter ]=useState(0)
@@ -24,6 +25,7 @@ export default function CounterPage(){
       };
 
     return (
+      <Layout>
         <div className={`${'colors'} flex flex-col items-center justify-center`} style={{ backgroundSize: getBackgroundSize() }} justify="center" align="center">
         <Card
       className="border-none"
@@ -43,5 +45,6 @@ export default function CounterPage(){
       </CardBody>
     </Card>
     </div>
+    </Layout>
     )
     }
