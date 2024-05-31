@@ -8,7 +8,7 @@ Prerequisites
 Go to the project folder and run npm install
 
  ### `cd - to project Folder`
-   #### `npm install`
+ #### `npm install`
 
 3. Now run your app
-   #### `npm start`
+#### `npm start`
