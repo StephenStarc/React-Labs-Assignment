@@ -1,8 +1,14 @@
-# React + Vite
+# How to Use this in your react Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+### Prerequisites
 
-Currently, two official plugins are available:
+1. If don't have the project files zip than clone the Repository: Clone the credit-slider repository from (https://github.com/StephenStarc/React-Labs-Assignment.git).
+ ### `git clone https://github.com/StephenStarc/React-Labs-Assignment.git`
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+2. Go to the project folder and run npm install
+
+ #### `npm install`
+
+3. Now run your app
+   
+#### `npm start`
