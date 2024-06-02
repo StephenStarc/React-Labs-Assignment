@@ -26,25 +26,28 @@ export default function FormPage(){
       }, [isFormChanged])
 
     const onChangeHandler = (e) => {
+
         setIsFormChanged(true)
+        const inputValue = e.target.value
         switch(e.target.name){
             case 'name':
-                setName(e.target.value)
+                setName(inputValue)
                 break;
             case 'address':
-                setAddress(e.target.value)
+                setAddress(inputValue)
                 break;
             case 'email':
-                setEmail(e.target.value)
+                setEmail(inputValue)
                 break;
             case 'phone':
-                setPhone(e.target.value)
+                setPhone(inputValue)
                 break;
         }
-        setIsFormChanged(true);
     }
     const submitHandler = (event) => {
+
         event.preventDefault()
+
         if(Name == '' || Address == '' || Email == '' || Phone == ''){
             toast.error(`Please fill all the fields `)
         }else{
