@@ -21,13 +21,13 @@ function Counter() {
     }
 
     const getBackgroundSize = () => {
-        const maxCount = 80; // Adjust this value as needed
+        const maxCount = 80;
         const percentage = Math.min(counter / maxCount, 1) * 80;
         return `${percentage}% 100%`;
       };
 
   return (
-    <div className={`${'colors'} flex flex-col items-center justify-center`} style={{ backgroundSize: getBackgroundSize() }} justify="center" align="center">
+    <div className={'colors flex flex-col items-center justify-center'} style={{ backgroundSize: getBackgroundSize() }} justify="center" align="center">
     <Card
   className="border-none"
   shadow="sm"
